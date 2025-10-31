@@ -1,0 +1,79 @@
+/* --- General Layout --- */
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #e94e4e, #852828);
+    margin: 0;
+    padding: 0;
+    color: #fff;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* --- Delete Container --- */
+form {
+    background: #fff;
+    color: #333;
+    padding: 40px 50px;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    width: 350px;
+}
+
+h2 {
+    text-align: center;
+    color: #e94e4e;
+    margin-bottom: 25px;
+    font-size: 1.3rem;
+}
+
+/* --- Buttons --- */
+button {
+    background-color: #e94e4e;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: 0.3s;
+    margin: 5px;
+    width: 45%;
+}
+
+button:hover {
+    background-color: #c03939;
+}
+
+/* --- Cancel link styled as button --- */
+a {
+    display: inline-block;
+    background-color: #ccc;
+    color: #333;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: 0.3s;
+    margin: 5px;
+    width: 45%;
+}
+
+a:hover {
+    background-color: #999;
+    color: #fff;
+}
+
+/* --- Responsive --- */
+@media (max-width: 480px) {
+    form {
+        width: 90%;
+        padding: 30px;
+    }
+    button, a {
+        width: 100%;
+        margin-top: 10px;
+    }
+}

@@ -1,0 +1,89 @@
+/* 🌸 تنظیم کلی صفحه */
+body {
+    font-family: "Poppins", sans-serif;
+    background: linear-gradient(135deg, #89f7fe, #66a6ff);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+/* 🧭 باکس فرم */
+form {
+    background-color: #ffffff;
+    padding: 40px 35px;
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    width: 320px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* 🔹 عنوان صفحه */
+.title {
+    position: absolute;
+    top: 40px;
+    font-size: 28px;
+    color: #ffffff;
+    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    font-weight: 600;
+}
+
+/* 🧩 فیلدهای ورودی */
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+    padding: 12px 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 15px;
+    transition: 0.3s ease;
+}
+
+input:focus {
+    border-color: #66a6ff;
+    box-shadow: 0 0 8px rgba(102, 166, 255, 0.4);
+    outline: none;
+}
+
+/* 🔘 دکمه ثبت */
+button {
+    background-color: #007bff;
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    padding: 12px;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+button:hover {
+    background-color: #005ecb;
+}
+
+/* 🔻 پیام خطا */
+p {
+    color: red;
+    text-align: center;
+    font-size: 14px;
+}
+
+/* 🔗 لینک ورود */
+h4 {
+    text-align: center;
+    font-size: 14px;
+    color: #444;
+}
+
+h4 a {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+h4 a:hover {
+    text-decoration: underline;
+}

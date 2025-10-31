@@ -1,0 +1,101 @@
+/* --- General Page Layout --- */
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #74ABE2, #5563DE);
+    margin: 0;
+    padding: 0;
+    color: #333;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* --- Form Container --- */
+form {
+    background: #fff;
+    padding: 40px 50px;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    width: 380px;
+}
+
+h2 {
+    text-align: center;
+    color: #5563DE;
+    margin-bottom: 25px;
+    font-size: 1.5rem;
+}
+
+/* --- Inputs & Textarea --- */
+input[type="text"],
+input[type="number"],
+textarea,
+input[type="file"] {
+    width: 100%;
+    padding: 10px 12px;
+    margin: 10px 0;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+    box-sizing: border-box;
+    outline: none;
+    transition: 0.3s;
+}
+
+input:focus,
+textarea:focus {
+    border-color: #5563DE;
+    box-shadow: 0 0 5px rgba(85, 99, 222, 0.3);
+}
+
+/* --- Image Preview --- */
+img {
+    margin-top: 10px;
+    border-radius: 10px;
+    box-shadow: 0 0 5px rgba(0,0,0,0.3);
+}
+
+/* --- Buttons --- */
+button {
+    background-color: #5563DE;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: 0.3s;
+    margin-top: 15px;
+    width: 100%;
+}
+
+button:hover {
+    background-color: #3746b6;
+}
+
+/* --- Back Link --- */
+a {
+    display: inline-block;
+    margin-top: 20px;
+    text-decoration: none;
+    color: #fff;
+    background-color: rgba(255, 255, 255, 0.3);
+    padding: 10px 20px;
+    border-radius: 10px;
+    transition: 0.3s;
+}
+
+a:hover {
+    background-color: #fff;
+    color: #5563DE;
+}
+
+/* --- Responsive --- */
+@media (max-width: 480px) {
+    form {
+        width: 90%;
+        padding: 30px;
+    }
+}

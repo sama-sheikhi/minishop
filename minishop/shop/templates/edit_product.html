@@ -1,0 +1,22 @@
+{% load static %}
+<html>
+<head>
+    <title>Edit Product</title>
+    <link rel="stylesheet" href="{% static 'edit.css' %}">
+</head>
+<body>
+    <h2>Edit Product: {{ product.name }}</h2>
+
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="text" name="name" value="{{ product.name }}" required><br>
+        <textarea name="description" required>{{ product.description }}</textarea><br>
+        <input type="number" name="price" value="{{ product.price }}" step="0.01" required><br>
+        <input type="file" name="image" accept="image/*"><br>
+        <img src="{{ product.image.url }}" width="150"><br><br>
+        <button type="submit">Save Changes</button>
+    </form>
+
+    <a href="{% url 'home' %}">Back to Home</a>
+</body>
+</html>

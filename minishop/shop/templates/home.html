@@ -1,0 +1,59 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="{% static 'home.css' %}">
+</head>
+<body>
+
+    <!-- Header / Nav -->
+    <header class="site-header">
+        <h2 class="title">All Products</h2>
+
+        <div class="nav-actions">
+            {% if request.user.is_authenticated %}
+                <a href="{% url 'profile' %}" class="profile-btn">Profile</a>
+                <a href="{% url 'logout' %}" class="logout-btn">Logout</a>
+            {% else %}
+                <a href="{% url 'login' %}" class="login-btn">Login</a>
+                <a href="{% url 'register' %}" class="register-btn">Register</a>
+            {% endif %}
+        </div>
+    </header>
+
+    <!-- Products List -->
+    {% if products %}
+        {% for i in products %}
+            <div class="product">
+                <div class="top">
+                    <img src="{{ i.image.url }}" alt="{{ i.name }}" width="250">
+                </div>
+                <div class="bottom">
+                    <h3>{{ i.name }}</h3>
+                    <p><small>By: {{ i.owner.username }}</small></p>
+
+                    {% if request.user == i.owner or request.user.is_superuser %}
+                        <a href="{% url 'edit_product' product_id=i.id %}">Edit</a> |
+                        <a href="{% url 'delete_product' product_id=i.id %}">Delete</a> |
+                    {% endif %}
+                    <a href="{% url 'product_detail' product_id=i.id %}">Details</a>
+                </div>
+            </div>
+        {% endfor %}
+    {% else %}
+        <h3 style="color:red;">No products available.</h3>
+    {% endif %}
+
+    <!-- Add Product / Login Prompt -->
+    <hr>
+    {% if request.user.is_authenticated %}
+        <a href="{% url 'add_product' %}" class="add-btn">➕ Add New Product</a>
+    {% else %}
+        <a href="{% url 'login' %}" class="add-btn">Login to add products</a>
+    {% endif %}
+
+</body>
+</html>

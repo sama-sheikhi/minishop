@@ -1,0 +1,42 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Profile</title>
+    <link rel="stylesheet" href="{% static 'profile.css' %}">
+</head>
+<body>
+    <header class="site-header">
+        <h2 class="title">Your Profile — {{ request.user.username }}</h2>
+        <div class="nav-actions">
+            <a href="{% url 'home' %}" class="back-btn">Home</a>
+            <a href="{% url 'add_product' %}" class="add-btn">➕ Add Product</a>
+            <a href="{% url 'logout' %}" class="logout-btn">Logout</a>
+        </div>
+    </header>
+
+    <section class="profile-products">
+        {% if user_products %}
+            {% for p in user_products %}
+                <div class="product">
+                    <div class="top">
+                        <img src="{{ p.image.url }}" alt="{{ p.name }}" width="200">
+                    </div>
+                    <div class="bottom">
+                        <h3>{{ p.name }}</h3>
+                        <p>{{ p.description }}</p>
+                        <p><strong>Price:</strong> {{ p.price }} $</p>
+                        <a href="{% url 'edit_product' p.id %}">Edit</a> |
+                        <a href="{% url 'delete_product' p.id %}">Delete</a> |
+                        <a href="{% url 'product_detail' p.id %}">Details</a>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p class="empty-msg">No Products!</p>
+        {% endif %}
+    </section>
+</body>
+</html>
