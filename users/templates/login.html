@@ -1,0 +1,24 @@
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="{% static 'login.css'%}">
+</head>
+<body>
+    <h1 class="title">Login Page</h1>
+
+    <form method="post">
+        {% csrf_token %}
+        <input type="text" name="username" placeholder="Enter username:" required>
+        <input type="password" name="password" placeholder="Enter Password:" required>
+        {% if error %}
+            <p style="color:rgb(245, 10, 10);">{{ error }}</p>
+        {% endif %}
+        <button type="submit">Login</button>
+    </form>
+
+    <h4>Don't have an account? <a href="{% url 'register' %}">Register</a></h4>
+</body>
+</html>

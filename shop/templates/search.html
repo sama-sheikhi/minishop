@@ -1,0 +1,75 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Products</title>
+    <link rel="stylesheet" href="{% static 'search.css' %}">
+</head>
+<body>
+    <h2>Search Products</h2>
+
+    <form method="get" class="filter-form">
+        <!-- Search -->
+        <input type="text" name="q" value="{{ request.GET.q }}" placeholder="Search by name or description...">
+
+        <!-- Category Filter -->
+        <h4>Filter by Category:</h4>
+        {% for i in categories %}
+            <label>
+                <input type="checkbox" name="category" value="{{ i }}"
+                       {% if i in selected_categories %}checked{% endif %}>
+                {{ i|capfirst }}
+            </label><br>
+        {% endfor %}
+
+        <!-- Country Filter -->
+        <h4>Filter by Country:</h4>
+        <input type="text" name="country" value="{{ request.GET.country }}" placeholder="Enter country">
+
+        <!-- Price Range Filter -->
+        <h4>Filter by Price Range:</h4>
+        <label>Min:</label>
+        <input type="number" name="min_price" value="{{ request.GET.min_price }}" placeholder="0">
+        <label>Max:</label>
+        <input type="number" name="max_price" value="{{ request.GET.max_price }}" placeholder="10000">
+
+        <!-- In-stock Filter -->
+        <h4>Stock Status:</h4>
+        <label>
+            <input type="checkbox" name="in_stock" value="1"
+                   {% if request.GET.in_stock %}checked{% endif %}>
+            Only show available products
+        </label>
+
+        <br><br>
+        <button type="submit">Search</button>
+    </form>
+
+    <hr>
+
+    <!-- Results -->
+    <h3>Results:</h3>
+    <ul>
+        {% for item in results %}
+            <li>
+                <strong>{{ item.name }}</strong> — {{ item.price }} $  
+                <small>({{ item.category|capfirst }}, {{ item.country }})</small>
+                
+                {% if item.stock == 0 %}
+                    <span style="color:red;">Out of stock</span>
+                {% elif not item.is_active %}
+                    <span style="color:orange;">Not available</span>
+                {% else %}
+                    <span style="color:green;">In stock</span>
+                {% endif %}
+            </li>
+        {% empty %}
+            <li>No products found.</li>
+        {% endfor %}
+    </ul>
+
+    <a href="{% url 'home' %}" class="back-btn">⬅ Back to Home</a>
+</body>
+</html>

@@ -1,0 +1,40 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Order #{{ order.id }} Details</title>
+<link rel="stylesheet" href="{% static 'order_detail.css' %}">
+</head>
+<body>
+<header class="detail-header">
+    <h1>📄 Order Details #{{ order.id }}</h1>
+    <div class="nav-buttons">
+        <a href="{% url 'orders_list' %}" class="btn">📦 Back to Orders</a>
+        <a href="{% url 'home' %}" class="btn">🏠 Home</a>
+    </div>
+</header>
+
+<main class="detail-main">
+    <div class="order-info">
+        <p><strong>Full Name:</strong> {{ order.full_name }}</p>
+        <p><strong>Phone:</strong> {{ order.phone }}</p>
+        <p><strong>Address:</strong> {{ order.address }}</p>
+        <p><strong>Status:</strong> 
+            <span class="status {% if order.status == 'processing' %}processing{% elif order.status == 'shipped' %}shipped{% else %}completed{% endif %}">
+                {{ order.status|capfirst }}
+            </span>
+        </p>
+        <p><strong>Total Amount:</strong> {{ order.total_amount }} USD</p>
+    </div>
+
+    <h2>Products</h2>
+    <ul class="product-list">
+        {% for item in order.items.all %}
+            <li>{{ item.product.name }} – Quantity: {{ item.quantity }} – Price: {{ item.price }} USD</li>
+        {% endfor %}
+    </ul>
+</main>
+</body>
+</html>

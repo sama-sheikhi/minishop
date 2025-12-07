@@ -1,0 +1,58 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Checkout</title>
+<link rel="stylesheet" href="{% static 'checkout.css' %}">
+</head>
+<body>
+<header class="cart-header">
+<h1>💳 Checkout</h1>
+<div class="nav-buttons">
+<a href="{% url 'cart' %}" class="btn">🛒 Back to Cart</a>
+</div>
+</header>
+<main class="cart-main">
+        {% if messages %}
+            {% for message in messages %}
+<div class="alert {{ message.tags }}">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+        {% if cart_items %}
+<!-- Cart Items Preview -->
+<div class="cart-items">
+                {% for item in cart_items %}
+<div class="cart-item">
+<img src="{{ item.product.image.url }}" alt="{{ item.product.name }}" width="80" height="80">
+<div class="item-details">
+<h3>{{ item.product.name }}</h3>
+<p>Price: <strong>{{ item.product.price }} $</strong></p>
+<p>Quantity: <strong>{{ item.quantity }}</strong></p>
+<p>Total: <strong>{{ item.total_price }} $</strong></p>
+</div>
+</div>
+                {% endfor %}
+</div>
+<!-- Shipping Info Form -->
+<form method="post" class="shipping-form">
+                {% csrf_token %}
+<h3>Shipping Information</h3>
+<label for="full_name">Full Name:</label>
+<input type="text" id="full_name" name="full_name" required>
+<label for="address">Address:</label>
+<textarea id="address" name="address" rows="3" required></textarea>
+<label for="phone">Phone:</label>
+<input type="text" id="phone" name="phone" required>
+<label for="additional_info">Additional Info:</label>
+<textarea id="additional_info" name="additional_info" rows="2"></textarea>
+<p class="total-amount">Total Amount: <strong>{{ total_price }} $</strong></p>
+<button type="submit" class="place-order-btn">✅ Place Order</button>
+</form>
+        {% else %}
+<p class="empty">Your cart is empty 🛍️</p>
+        {% endif %}
+</main>
+</body>
+</html>

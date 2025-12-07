@@ -1,0 +1,76 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ product.name }}</title>
+    <link rel="stylesheet" href="{% static 'detail.css' %}">
+</head>
+<body>
+
+    <!-- Header / Nav -->
+<header class="site-header">
+    <h2 class="title">{{ product.name }}</h2>
+
+    <div class="nav-actions">
+        <a href="{% url 'home' %}" class="nav-btn back-btn">🏠 Back to Home</a>
+
+        {% if request.user.is_authenticated %}
+            <a href="{% url 'profile' %}" class="nav-btn profile-btn">Profile</a>
+            <a href="{% url 'cart' %}" class="nav-btn cart-btn">🛒 Cart</a>
+            <a href="{% url 'logout' %}" class="nav-btn logout-btn">Logout</a>
+        {% else %}
+            <a href="{% url 'login' %}" class="nav-btn login-btn">Login</a>
+        {% endif %}
+    </div>
+</header>
+
+    <!-- Product Details -->
+    <div class="profile-products">
+        <div class="product">
+            <div class="top">
+                <img src="{{ product.image.url }}" alt="{{ product.name }}" width="300">
+            </div>
+            <div class="bottom">
+                <p><strong>Description:</strong> {{ product.description }}</p>
+                <p><strong>Category:</strong> {{ product.category }}</p>
+                <p><strong>Country:</strong> {{ product.country }}</p>
+                <p><strong>Price:</strong> {{ product.price }} $</p>
+                <p><strong>Owner:</strong> {{ product.owner.username }}</p>
+                <p><strong>Date Added:</strong> {{ product.created_at|date:"Y-m-d" }}</p>
+
+                <!-- Stock / Status -->
+                <p><strong>Status:</strong>
+                    {% if not product.is_active %}
+                        Not Available for Sale
+                    {% elif product.stock == 0 %}
+                        Out of Stock
+                    {% else %}
+                        {{ product.stock }} available
+                    {% endif %}
+                </p>
+
+                <!-- Add to Cart / Login Button -->
+                {% if request.user.is_authenticated %}
+                    {% if product.is_active and product.stock > 0 %}
+                        <a href="{% url 'add_to_cart' product.id %}" class="buy-btn">🛒 Add to Cart</a>
+                    {% else %}
+                        <span class="disabled-btn">Cannot Buy</span>
+                    {% endif %}
+                {% else %}
+                    <a href="{% url 'login' %}" class="buy-btn">Login to Buy</a>
+                {% endif %}
+
+                {% if request.user == product.owner or request.user.is_superuser %}
+                    <div>
+                        <a href="{% url 'edit_product' product_id=product.id %}">Edit</a> |
+                        <a href="{% url 'delete_product' product_id=product.id %}">Delete</a>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

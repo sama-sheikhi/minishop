@@ -1,0 +1,41 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Orders</title>
+<link rel="stylesheet" href="{% static 'orders_list.css' %}">
+</head>
+<body>
+<header class="orders-header">
+    <h1>📦 My Orders</h1>
+    <div class="nav-buttons">
+        <a href="{% url 'home' %}" class="btn">🏠 Back to Products</a>
+        <a href="{% url 'profile' %}" class="btn">👤 Profile</a>
+    </div>
+</header>
+
+<main class="orders-main">
+    {% if orders %}
+        <div class="orders-container">
+            {% for order in orders %}
+                <div class="order-card">
+                    <h3>Order #{{ order.id }}</h3>
+                    <p><strong>Status:</strong> 
+                        <span class="status {% if order.status == 'processing' %}processing{% elif order.status == 'shipped' %}shipped{% else %}completed{% endif %}">
+                            {{ order.status|capfirst }}
+                        </span>
+                    </p>
+                    <p><strong>Total:</strong> {{ order.total_amount }} USD</p>
+                    <p><strong>Placed On:</strong> {{ order.created_at|date:"M d, Y" }}</p>
+                    <a href="{% url 'order_detail' order.id %}" class="details-btn">View Details</a>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p class="empty">You have no orders yet 🛍️</p>
+    {% endif %}
+</main>
+</body>
+</html>
