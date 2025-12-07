@@ -1,0 +1,63 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Django stuff:
+*.log
+*.pot
+*.pyc
+*.pyo
+*.pyd
+db.sqlite3
+*.sqlite3
+
+# Media files (user uploaded)
+media/
+
+# Static files (collected)
+staticfiles/
+static/
+
+# Virtual environment
+venv/
+.env/
+.env.*
+
+# PyCharm / IDE settings
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Coverage / test reports
+.coverage
+htmlcov/
+*.cover
+*.py,cover
+nosetests.xml
+coverage.xml
+*.log
+
+# Python environment
+pip-log.txt
+pip-delete-this-directory.txt
+
+# mypy
+.mypy_cache/
+.dmypy.json
+.pyre/
+
+# Celery beat schedule files
+celerybeat-schedule
+
+# Django migrations (optional: usually committed, but you can ignore them if you want)
+*/migrations/*.py
+!*/migrations/__init__.py
